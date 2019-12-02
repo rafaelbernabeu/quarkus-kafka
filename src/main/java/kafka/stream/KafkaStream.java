@@ -2,6 +2,7 @@ package kafka.stream;
 
 import io.reactivex.Flowable;
 import io.smallrye.reactive.messaging.annotations.Broadcast;
+import io.smallrye.reactive.messaging.annotations.Merge;
 import org.eclipse.microprofile.reactive.messaging.Incoming;
 import org.eclipse.microprofile.reactive.messaging.Outgoing;
 
@@ -20,6 +21,12 @@ public class KafkaStream {
     public String process(String data) {
         System.out.println(data);
         return data + " passou pelo quarkus";
+    }
+
+    @Merge
+    @Incoming("test")
+    public void consume(Integer data) {
+        System.out.println(data);
     }
 
     @Broadcast
